@@ -1,15 +1,17 @@
 <script setup lang="ts">
+// Removed unused import
+
 // Nuxt 4: useAsyncData with deep: true for proper reactivity
-const { data: images } = await useAsyncData('cats', async () => {
+const { data: images } = await useAsyncData('cats', async (): Promise<string[]> => {
   // 3 independent fetches to cataas.com (no CORS json, return images)
-  const endpoints = [
+  const endpoints: string[] = [
     'https://cataas.com/cat/says/M?type=square&fontColor=yellow',
     'https://cataas.com/cat/says/E?type=square&fontColor=red',
     'https://cataas.com/cat/says/O?type=square&fontColor=white',
     'https://cataas.com/cat/says/W?type=square&fontColor=black',
   ]
   // To avoid caching, add timestamp
-  const urls = endpoints.map((u) => `${u}&t=${Date.now()}-${Math.random()}`)
+  const urls: string[] = endpoints.map((u: string) => `${u}&t=${Date.now()}-${Math.random()}`)
   return urls
 }, {
   deep: true // Nuxt 4: ensure deep reactivity

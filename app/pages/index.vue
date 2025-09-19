@@ -1,3 +1,7 @@
+<script setup lang="ts">
+// Home page component with TypeScript setup
+</script>
+
 <template>
   <main class="container">
     <section class="stack home-section">

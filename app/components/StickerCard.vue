@@ -1,8 +1,10 @@
 <script setup lang="ts">
-defineProps<{ images: string[] }>()
-const isOpen = ref(false)
+import type { StickerCardProps, PickFunction } from '../../types'
 
-const slugFromIndex = (i: number) => `cat-${i + 1}`
+defineProps<StickerCardProps>()
+const isOpen = ref<boolean>(false)
+
+const slugFromIndex = (i: number): string => `cat-${i + 1}`
 </script>
 
 <template>

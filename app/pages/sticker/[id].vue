@@ -1,8 +1,17 @@
 <script setup lang="ts">
+import type { 
+  SeededRandom, 
+  PickFunction, 
+  TipForFunction, 
+  CatTopic, 
+  CatAdjective, 
+  CatRole 
+} from '../../../types'
+
 const route = useRoute()
 
 // Seeded pseudo-random based on id for stable but varied content
-function seededRandom(seed: string) {
+const seededRandom: SeededRandom = (seed: string): number => {
   let h = 2166136261
   for (let i = 0; i < seed.length; i++) {
     h ^= seed.charCodeAt(i)
@@ -16,10 +25,10 @@ function seededRandom(seed: string) {
   return (h >>> 0) / 4294967295
 }
 
-const id = computed(() => String(route.params.id || 'expert'))
-const rnd = computed(() => seededRandom(id.value))
+const id = computed<string>(() => String(route.params.id || 'expert'))
+const rnd = computed<number>(() => seededRandom(id.value))
 
-const topics = [
+const topics: CatTopic[] = [
   'Как вкусно кушать',
   'Как сладко спать',
   'Как урчать',
@@ -29,20 +38,20 @@ const topics = [
   'Как прикалываться'
 ]
 
-function pick<T>(arr: T[], r: number) {
+const pick: PickFunction = <T>(arr: T[], r: number): T => {
   const idx = Math.floor(r * arr.length) % arr.length
-  return arr[idx]
+  return arr[idx]!
 }
 
-const hero = computed(() => {
-  const adjectives = ['мудрый', 'харизматичный', 'ласковый', 'величественный', 'озорной']
-  const roles = ['советник', 'коуч', 'наставник', 'гуру', 'эксперт']
+const hero = computed<string>(() => {
+  const adjectives: CatAdjective[] = ['мудрый', 'харизматичный', 'ласковый', 'величественный', 'озорной']
+  const roles: CatRole[] = ['советник', 'коуч', 'наставник', 'гуру', 'эксперт']
   const a = pick(adjectives, rnd.value)
   const r = pick(roles, rnd.value * 1.37)
   return `Кот-${id.value}: ${a} ${r}`
 })
 
-const sections = computed(() => {
+const sections = computed<CatTopic[]>(() => {
   const base = [...topics]
   // rotate by random offset
   const offset = Math.floor(rnd.value * base.length)
@@ -52,7 +61,7 @@ const sections = computed(() => {
   return rotated.slice(0, count)
 })
 
-const tips = [
+const tips: string[] = [
   'Сначала понюхай, потом муркни — и только затем дегустируй.',
   'Главное — занять тёплое место. Если это клавиатура, ну что ж…',
   'Урчать лучше на вдохе-выдохе, сохраняя ритм серенад.',
@@ -62,9 +71,9 @@ const tips = [
   'Лёгкий пинок ручке — и ты уже король вечера.'
 ]
 
-function tipFor(i: number) {
+const tipFor: TipForFunction = (i: number): string => {
   const r = seededRandom(id.value + ':' + i)
-  return tips[Math.floor(r * tips.length) % tips.length]
+  return tips[Math.floor(r * tips.length) % tips.length]!
 }
 </script>
 
