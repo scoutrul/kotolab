@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// Layout component with proper TypeScript setup
+// Default layout component
 </script>
 
 <template>

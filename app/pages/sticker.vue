@@ -1,6 +1,4 @@
 <script setup lang="ts">
-// Removed unused import
-
 // Nuxt 4: useAsyncData with deep: true for proper reactivity
 const { data: images } = await useAsyncData('cats', async (): Promise<string[]> => {
   // 3 independent fetches to cataas.com (no CORS json, return images)

@@ -5,18 +5,29 @@
     Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, 'Apple Color Emoji',
     'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji', sans-serif;
 
-  --bg: #FFF7ED; /* warm cream */
-  --text: #1F2937; /* slate-800 */
-  --muted: #6B7280; /* slate-500 */
-  --brand: #F59E0B; /* accent */
-  --card: #ffffff;
-  --border: #e5e7eb;
+  /* Color palette */
+  --color-bg: #FFF7ED; /* warm cream */
+  --color-text: #1F2937; /* slate-800 */
+  --color-muted: #6B7280; /* slate-500 */
+  --color-brand: #F59E0B; /* accent */
+  --color-surface: #ffffff;
+  --color-border: #e5e7eb;
 
+  /* Border radius */
   --radius-lg: 16px;
   --radius-md: 12px;
   --radius-sm: 8px;
 
+  /* Shadows */
   --shadow-1: 0 15px 35px rgba(15, 23, 42, 0.12), 0 5px 10px rgba(15, 23, 42, 0.06);
+
+  /* Legacy aliases for backward compatibility */
+  --bg: var(--color-bg);
+  --text: var(--color-text);
+  --muted: var(--color-muted);
+  --brand: var(--color-brand);
+  --card: var(--color-surface);
+  --border: var(--color-border);
 }
 
 html, body, #__nuxt, #__nuxt > * {
@@ -25,8 +36,8 @@ html, body, #__nuxt, #__nuxt > * {
 
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--text);
+  background: var(--color-bg);
+  color: var(--color-text);
   font-family: var(--font-sans);
 }
 
@@ -37,8 +48,8 @@ body {
 }
 
 .card {
-  background: var(--card);
-  border: 1px solid var(--border);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-1);
 }
@@ -47,7 +58,7 @@ body {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  background: var(--brand);
+  background: var(--color-brand);
   color: #111;
   border: none;
   padding: 10px 16px;
@@ -73,6 +84,4 @@ body {
   align-items: center;
 }
 
-.muted { color: var(--muted); }
-
-
+.muted { color: var(--color-muted); }

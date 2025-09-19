@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// Home page component with TypeScript setup
+// Home page component
 </script>
 
 <template>
@@ -24,6 +24,3 @@
   margin: 0;
 }
 </style>
-
-
-

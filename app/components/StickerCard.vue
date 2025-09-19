@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { StickerCardProps, PickFunction } from '../../types'
+import type { StickerCardProps } from '../../types'
 
 defineProps<StickerCardProps>()
 const isOpen = ref<boolean>(false)
@@ -88,6 +88,3 @@ const slugFromIndex = (i: number): string => `cat-${i + 1}`
   opacity: 1;
 }
 </style>
-
-
-
