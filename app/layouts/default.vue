@@ -5,6 +5,8 @@
         <NuxtLink to="/" class="brand">Котолаб 🐾</NuxtLink>
         <nav class="row nav">
           <NuxtLink to="/sticker">Стикер</NuxtLink>
+          <NuxtLink to="/sticker/expert">Эксперты</NuxtLink>
+          <a href="https://cataas.com" target="_blank" rel="noreferrer">CATAAS</a>
         </nav>
       </div>
     </header>
@@ -15,7 +17,12 @@
 
     <footer class="site-footer">
       <div class="container">
-        <p>С любовью и урчанием · © Котолаб</p>
+        <p>
+          С любовью и урчанием · © Котолаб ·
+          <a href="https://github.com/scoutrul/kotolab" target="_blank" rel="noopener noreferrer">GitHub проекта</a>
+          · <a href="https://github.com/scoutrul" target="_blank" rel="noopener noreferrer">GitHub разработчика</a>
+          · <a href="https://bubbleme.space/" target="_blank" rel="noopener noreferrer">CV‑игра</a>
+        </p>
       </div>
     </footer>
   </div>
