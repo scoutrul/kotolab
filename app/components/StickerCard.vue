@@ -1,6 +1,8 @@
 <script setup lang="ts">
 defineProps<{ images: string[] }>()
 const isOpen = ref(false)
+
+const slugFromIndex = (i: number) => `cat-${i + 1}`
 </script>
 
 <template>
@@ -10,13 +12,15 @@ const isOpen = ref(false)
     @mouseenter="isOpen = true"
     @mouseleave="isOpen = false"
   >
-    <header class="title">Консультация эксперта</header>
+    <header class="title">Консультация кота-эксперта 🐾</header>
 
     <div class="avatars">
-      <img v-for="(src, i) in images" :key="i" :src="src" alt="cat" />
+      <NuxtLink v-for="(src, i) in images" :key="i" :to="{ name: 'sticker-id', params: { id: slugFromIndex(i) } }" class="avatar-link">
+        <img :src="src" alt="cat" />
+      </NuxtLink>
     </div>
 
-    <button class="button full">Получить консультацию</button>
+    <NuxtLink class="button" :to="{ name: 'sticker-id', params: { id: 'expert' } }">Мурр, хочу совет!</NuxtLink>
   </aside>
 </template>
 
@@ -26,7 +30,7 @@ const isOpen = ref(false)
   right: 16px;
   top: 50%;
   transform: translateY(-50%) translateX(120px) rotate(-2deg);
-  width: 280px;
+  width: 140px;
   padding: 16px;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s;
   will-change: transform;
@@ -46,6 +50,8 @@ const isOpen = ref(false)
     gap: 8px;
     margin-bottom: 12px;
 
+    .avatar-link { display: block; }
+
     img {
       width: 100%;
       aspect-ratio: 1/1;
@@ -54,9 +60,8 @@ const isOpen = ref(false)
     }
   }
 
-  .full {
-    width: 100%;
-    justify-content: center;
+  .button {
+    text-align: center;
   }
 }
 

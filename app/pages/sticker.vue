@@ -3,9 +3,10 @@
 const { data: images } = await useAsyncData('cats', async () => {
   // 3 independent fetches to cataas.com (no CORS json, return images)
   const endpoints = [
-    'https://cataas.com/cat?type=square',
-    'https://cataas.com/cat/says/Hi?type=square',
-    'https://cataas.com/cat?type=square&filter=mono',
+    'https://cataas.com/cat/says/M?type=square&fontColor=yellow',
+    'https://cataas.com/cat/says/E?type=square&fontColor=red',
+    'https://cataas.com/cat/says/O?type=square&fontColor=white',
+    'https://cataas.com/cat/says/W?type=square&fontColor=black',
   ]
   // To avoid caching, add timestamp
   const urls = endpoints.map((u) => `${u}&t=${Date.now()}-${Math.random()}`)
@@ -13,29 +14,37 @@ const { data: images } = await useAsyncData('cats', async () => {
 }, {
   deep: true // Nuxt 4: ensure deep reactivity
 })
+
+const route = useRoute()
 </script>
 
 <template>
   <main class="container">
-    <section class="stack sticker-page-section">
-      <h1 class="page-title">Страница со стикером</h1>
-      <p class="muted">Прокрутите страницу; стикер закреплён справа по центру, раскрывается при hover.</p>
+    <template v-if="!route.params.id">
+      <section class="stack sticker-page-section">
+        <h1 class="page-title">Страница со стикером</h1>
+        <p class="muted">Прокрутите страницу; стикер закреплён справа по центру, раскрывается при hover.</p>
 
-      <div class="stack cards-gap">
-        <div v-for="i in 12" :key="i" class="card card-padded">
-          <div class="row gapped">
-            <div class="avatar-skeleton"></div>
-            <div class="stack flex-fill lines-gap">
-              <div class="line-skeleton line-lg"></div>
-              <div class="line-skeleton line-md w-90"></div>
-              <div class="line-skeleton line-md w-70"></div>
+        <div class="stack cards-gap">
+          <div v-for="i in 12" :key="i" class="card card-padded">
+            <div class="row gapped">
+              <div class="avatar-skeleton"></div>
+              <div class="stack flex-fill lines-gap">
+                <div class="line-skeleton line-lg"></div>
+                <div class="line-skeleton line-md w-90"></div>
+                <div class="line-skeleton line-md w-70"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <StickerCard v-if="images" :images="images" />
+      <StickerCard v-if="images" :images="images" />
+    </template>
+
+    <template v-else>
+      <NuxtPage />
+    </template>
   </main>
 </template>
 
